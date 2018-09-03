@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import { countNumOfAMonth } from '../utils/helpers';
 
-export default Ember.Route.extend({
+export default Route.extend({
   model() {
     return Em.RSVP.hash({
       customers: fetchCustomers(),

@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 
 export function checkIfclosed(isOpen, hash) {
   if (isOpen[0] === true) {
@@ -8,4 +8,4 @@ export function checkIfclosed(isOpen, hash) {
   }
 }
 
-export default Ember.Helper.helper(checkIfclosed);
+export default buildHelper(checkIfclosed);

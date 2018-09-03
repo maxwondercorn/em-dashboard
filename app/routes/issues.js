@@ -1,9 +1,11 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import { later, cancel } from '@ember/runloop';
+import Route from '@ember/routing/route';
 
-export default Ember.Route.extend({
+export default Route.extend({
   model() {
     // Fetch new data every 3 seconds with Ember.run.later 
-    let pollIssues = Ember.run.later(this, function() {
+    let pollIssues = later(this, function() {
       this.model().then()
           .then(function(data) {
             this.controller.set('model', data);
@@ -16,10 +18,10 @@ export default Ember.Route.extend({
     setTimeout(() => {
       if (window.location.hash !== '#/issues') {
         console.log('Cancelled polling issues data');
-        Ember.run.cancel(pollIssues);
+        cancel(pollIssues);
       }
     }, 100);
 
-    return Ember.$.get('./data/issues.json');
+    return $.get('./data/issues.json');
   }
 });

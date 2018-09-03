@@ -1,15 +1,16 @@
-import Ember from 'ember';
+import { sort } from '@ember/object/computed';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   sortProperties: ['id:asc'],
-  sortedModel: Ember.computed.sort('model', 'sortProperties'),
+  sortedModel: sort('model', 'sortProperties'),
   sortAscending: false,
 
   actions: {
     // property: the table column you want to sort by
     // id: the id of the header of the table you want to sort
     sortBy(property, id) {
-      if (this.get('sortAscending')) {
+      if (this.sortAscending) {
         this.toggleProperty('sortAscending');
         this.set('sortProperties', [property + ':asc']);
         $(id).children().text('keyboard_arrow_down');
@@ -39,15 +40,15 @@ export default Ember.Controller.extend({
   // Can filter the table by either customer's name, description, or employee's name
   filterText: '',
   filteredResults: function() {
-    var filterWord = this.get('filterText').toLowerCase();
+    var filterWord = this.filterText.toLowerCase();
     if (filterWord.length > 0) {
 
-      return this.get('sortedModel').filter((item) => {
+      return this.sortedModel.filter((item) => {
         return item.customer_name.toLowerCase().indexOf(filterWord) !== -1 ||
                item.description.toLowerCase().indexOf(filterWord) !== -1 ||
                item.employee_name.toLowerCase().indexOf(filterWord) !== -1;
       });
     }
-    return this.get('sortedModel');
+    return this.sortedModel;
   }.property('filterText', 'sortedModel')
 });

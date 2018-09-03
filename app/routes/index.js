@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import { csvJSON, countNumOfAMonth } from '../utils/helpers';
 
 let map;
@@ -6,7 +6,7 @@ let bounds;
 // Incrementing number for demo purpose
 // let randomNum = 0;
 
-export default Ember.Route.extend({
+export default Route.extend({
   model() {
     return Em.RSVP.hash({
       employees: fetchEmployees(),

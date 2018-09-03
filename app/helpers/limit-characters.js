@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 
 export function limitCharacters(params/*, hash*/) {
   if (params[0].length > 70) {
@@ -7,4 +7,4 @@ export function limitCharacters(params/*, hash*/) {
   return params[0];
 }
 
-export default Ember.Helper.helper(limitCharacters);
+export default buildHelper(limitCharacters);

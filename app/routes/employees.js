@@ -1,10 +1,10 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import { csvJSON } from '../utils/helpers';
 
 let map;
 let bounds;
 
-export default Ember.Route.extend({
+export default Route.extend({
   model() {
     // On Initial Load:
     $.get('./data/employees.csv')
